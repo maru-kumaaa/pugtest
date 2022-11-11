@@ -1,0 +1,15 @@
+extend /_layout
+append value
+ - const title= "トップページaaaaaaaaaaaaaaaaaaaaa";
+ - const description= "ディスクリプション";
+ - const keywords= "キーワード,キーワード2,キーワード3";
+append addcss
+ link(rel="stylesheet", href="top.css")
+block content
+  #content
+   .inner
+    p Hello Pug!aaaaaaaaaaaaaasdccvavbvaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+     a(href="/about/") aboutへのリンクaaaaaaaaaaaaa
+     a(href="/about/message/") 社長メッセージ
+append addjs
+ script(src="js/index.js")

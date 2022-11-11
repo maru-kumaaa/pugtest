@@ -1,0 +1,44 @@
+@charset "utf-8";
+$gr: #008b45;
+$or: #f47907;
+$gy: #f4f6f4;
+
+@mixin transition($func1: all, $func2: 0.3s) {
+ transition: ($func1 $func2);
+}
+
+@mixin break($break: 1024) {
+ @media screen and (max-width: $break + px) {
+  @content;
+ }
+}
+@mixin break-sp($break: 767) {
+ @media screen and (max-width: $break + px) {
+  @content;
+ }
+}
+
+@mixin break2($break: 1025) {
+ @media screen and (min-width: $break + px) {
+  @content;
+ }
+}
+@mixin break2-sp($break: 768) {
+ @media screen and (min-width: $break + px) {
+  @content;
+ }
+}
+
+@mixin txt_rl {
+ -ms-writing-mode: tb-rl;
+
+ writing-mode: vertical-rl;
+ -webkit-writing-mode: vertical-rl;
+}
+
+@mixin txt_tb {
+ -ms-writing-mode: lr-tb;
+
+ writing-mode: horizontal-tb;
+ -webkit-writing-mode: horizontal-tb;
+}
