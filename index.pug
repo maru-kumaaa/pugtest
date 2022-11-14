@@ -1,0 +1,19 @@
+extend /_template/_layout
+
+append meta
+ -
+  const title= "ページタイトル";
+  const description= "ディスクリプション";
+  const pagetype= "website" //- 下層はarticleに変更
+append addcss
+ link(rel="stylesheet", href="/index/css/layout.css")
+block content
+ .wrapper
+  section.kv KV
+  section.lead_area
+   .inner
+    h1 テキストテキスト
+    p テキストテキストテキストテキスト
+
+append addjs
+ script(src="/index/js/script.js")

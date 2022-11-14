@@ -1,0 +1,26 @@
+@use "../../common/css/mixin" as *;
+.kv {
+ width: 100%;
+ height: 300px;
+ background: #000;
+ color: #fff;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+.links {
+ margin: 40px 0;
+ ul {
+  display: flex;
+  justify-content: center;
+  li {
+   &:not(:last-child) {
+    margin-right: 30px;
+   }
+   a {
+    font-size: 20px;
+    text-decoration: underline;
+   }
+  }
+ }
+}

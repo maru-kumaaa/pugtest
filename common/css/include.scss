@@ -1,0 +1,39 @@
+@use "mixin" as *;
+
+header {
+ width: 100%;
+ height: 100px;
+ background: #ddd;
+ > .inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  nav {
+   ul {
+    display: flex;
+    li {
+     &:not(:last-child) {
+      margin-right: 20px;
+     }
+     a {
+      font-size: 16px;
+     }
+    }
+   }
+  }
+ }
+}
+
+footer {
+ background: #ccc;
+ width: 100%;
+ height: 100px;
+ color: #222;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}

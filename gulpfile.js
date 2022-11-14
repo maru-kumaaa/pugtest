@@ -13,28 +13,41 @@ const mozjpeg = require("imagemin-mozjpeg");
 const pngquant = require("imagemin-pngquant");
 const rename = require('gulp-rename');
 const webp = require('gulp-webp');
-var pug = require('gulp-pug');
+const pug = require('gulp-pug');
+const uglify = require("gulp-uglify");
+const plumber = require("gulp-plumber");
+const cleanCSS = require("gulp-clean-css");
 // const changed = require("gulp-changed");
 // プラグイン
 
-const scss = "./**/css/*.scss";
-const pugfile = ['src/**/*.pug', '!src/**/_*.pug'];
+const scss = ["./**/css/*.scss"];
+const pugfile = ['./**/*.pug', '!./**/_*.pug', '!./node_modules/**/*.pug', '!./.history/**/*.pug'];
+const slice_img = ["./**/img/*.{svg,gif,png,jpg,jpeg}", "!./_dist/**/img/*.{svg,gif,png,jpg,jpeg}", "./_history/**/img/*.{svg,gif,png,jpg,jpeg}", "./node_modules/**/*.{svg,gif,png,jpg,jpeg}"];
+const js = ["./**/*.js", "!./_dist/**/*.js", "!./node_modules/**/*.js", "!./gulpfile.js"];
 
 gulp.task('comb', () => {
  return gulp.src(scss)
   .pipe(cached(csscomb))
   .pipe(csscomb())
-  .pipe(gulp.dest("./"));
+  .pipe(gulp.dest("./_dist"));
 });
 
-gulp.task('pug', function () {
- return gulp
-  .src(pugfile)
+gulp.task('pug', (done) => {
+ gulp.src(pugfile)
   .pipe(pug({
    pretty: true,
-   basedir: './src'
+   basedir: './'
   }))
-  .pipe(gulp.dest('./dist/'));
+  .pipe(gulp.dest('./_dist'));
+ done();
+});
+
+gulp.task('uglify', (done) => {
+ gulp.src(js)
+  .pipe(plumber())
+  .pipe(uglify())
+  .pipe(gulp.dest('./_dist'));
+ done();
 });
 
 // sassコンパイル
@@ -49,8 +62,9 @@ gulp.task('sass', (done) => {
   .on("error", sass.logError)
   .pipe(autoprefixer())
   .pipe(csscomb())
+  .pipe(cleanCSS())
   .pipe(sourcemaps.write("./"))
-  .pipe(gulp.dest('./'));
+  .pipe(gulp.dest('./_dist'));
  done();
 });
 
@@ -58,14 +72,8 @@ gulp.task('sass', (done) => {
 gulp.task('browser-sync', (done) => {
  browserSync.init({
   server: {
-   baseDir: './dist/',
+   baseDir: './_dist/',
    index: './index.html',
-   middleware: [
-    connectSSI({
-     baseDir: __dirname + "/dist",
-     ext: '.html'
-    })
-   ]
   },
  });
  done();
@@ -78,7 +86,6 @@ gulp.task('browser-reload', (done) => {
 });
 
 //画像圧縮
-const slice_img = "./slice_img/**/*.{svg,gif,png,jpg,jpeg}";
 gulp.task("imagemin", function () {
  return gulp
   .src(slice_img)
@@ -99,12 +106,12 @@ gulp.task("imagemin", function () {
     }) // 圧縮率
    ])
   )
-  .pipe(
-   rename(function (path) {
-    path.dirname += '/img';
-   })
-  )
-  .pipe(gulp.dest('./'));
+  // .pipe(
+  //  rename(function (path) {
+  //   path.dirname += '/img';
+  //  })
+  // )
+  .pipe(gulp.dest('./_dist'));
 });
 
 
@@ -117,25 +124,27 @@ gulp.task("img-webp", function () {
   .pipe(webp({
    quality: 80
   }))
-  .pipe(
-   rename(function (path) {
-    path.dirname += '/img';
-   })
-  )
-  .pipe(gulp.dest('./'));
+  // .pipe(
+  //  rename(function (path) {
+  //   path.dirname += '/img';
+  //  })
+  // )
+  .pipe(gulp.dest('./_dist'));
 });
 
 // 監視ファイル
 gulp.task('watch-files', (done) => {
- gulp.watch(pugfile, gulp.task('pug'));
+ // gulp.watch(pugfile, gulp.task('pug'));
+ gulp.watch("./**/*.pug", gulp.task('pug'));
+ gulp.watch(js, gulp.task('uglify'));
  gulp.watch("./**/*.scss", gulp.task('sass'));
- gulp.watch("./slice_img/**", gulp.task('imagemin'));
- gulp.watch("./slice_img/**", gulp.task('img-webp'));
+ gulp.watch(["./**/img/**", "!./_dist/**"], gulp.task('imagemin'));
+ gulp.watch(["./**/img/**", "!./_dist/**"], gulp.task('img-webp'));
  gulp.watch("./*.html", gulp.task('browser-reload'));
  gulp.watch("./**/*.html", gulp.task('browser-reload'));
  gulp.watch("./**/*.css", gulp.task('browser-reload'));
- gulp.watch("./**/img/**", gulp.task('browser-reload'));
- gulp.watch("./**/*.js", gulp.task('browser-reload'));
+ gulp.watch("./_dist/**/img/**", gulp.task('browser-reload'));
+ gulp.watch("./_dist/**/*.js", gulp.task('browser-reload'));
  // gulp.watch("./scss/*.scss", gulp.task('comb'));
  done();
 });
