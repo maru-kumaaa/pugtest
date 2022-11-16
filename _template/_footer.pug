@@ -1,2 +1,23 @@
 footer
- .inner フッターa
+ -
+  const ft_nav = [
+   {
+    pageName: "会社概要",
+    pageDir: ""
+   },
+   {
+    pageName: "施工実績",
+    pageDir: ""
+   },
+   {
+    pageName: "リクルート",
+    pageDir: ""
+   },
+   {
+    pageName: "アクセス",
+    pageDir: ""
+   }
+  ]
+ ul
+  each page in ft_nav
+   li: a(href="/"+page["pageDir"]+"/") #{page["pageName"]}

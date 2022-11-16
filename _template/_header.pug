@@ -1,15 +1,37 @@
 header
  .inner
-  .logo ロゴ
+  .logo
+   img(src="/common/img/head_logo.gif", alt="")
+  -
+   const pages = [
+    {
+     pageName: "会社案内",
+     pageeng: "COMPANY",
+     pageDir: "company"
+    },
+    {
+     pageName: "施工実績",
+     pageeng: "RESULTS",
+     pageDir: "resuluts"
+    },
+    {
+     pageName: "リクルート",
+     pageeng: "RECRUIT",
+     pageDir: "recruit"
+    },
+    {
+     pageName: "アクセス",
+     pageeng: "ACCESS",
+     pageDir: "access"
+    }
+   ]
+  block pagecurrent
   nav
-   ul
-    li
-     a TOP
-    li
-     a ABOUT
-    li
-     a PRODUCTS
-    li
-     a RECRUIT
-    li
-     a CONTACT
+   ul.gnav
+    - for (let x = 0; x < pages.length; x++)
+     if pages[x]["pageDir"]==thisPageDir
+      li.act: a(href="/"+pages[x]["pageDir"]+"/") #{pages[x]["pageName"]}<span>#{pages[x]["pageeng"]}</span>
+     else
+      li: a(href="/"+pages[x]["pageDir"]+"/") #{pages[x]["pageName"]}<span>#{pages[x]["pageeng"]}</span>
+  .hd_tel
+   img(src="/common/img/head_contact.gif", alt="")

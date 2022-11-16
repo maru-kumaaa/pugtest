@@ -7,13 +7,61 @@ append meta
   const pagetype= "website" //- 下層はarticleに変更
 append addcss
  link(rel="stylesheet", href="/index/css/layout.css")
+append pagecurrent
+ - const thisPageDir = "company" //- ナビカレント
 block content
- .wrapper
-  section.kv KV
-  section.lead_area
-   .inner
-    h1 テキストテキスト
-    p テキストテキストテキストテキスト
+ section.kv_area
+  .inner
+   h1 人と水と空気の架け橋となり、
+    br
+    |あたたかく見守り続けます。
+ section.lead_area
+  .inner
+   h2 イシイ設備工業
+    br
+    |について
+   p 株式会社イシイ設備工業は、空調・給排水設備の設計から施工までトータルサポートしています。
+    br
+    |迅速な対応と丁寧な施工を目指し、各企業様の発展に貢献していきたいと考えています。
+    br
+    |空気調和・冷暖房設備工事／給排水・衛生・換気設備工事／その他建築附帯設備／省エネ改修事業
+   a.btn 会社案内
+    i
+ section.achievements_area
+  .inner
+   h2 施工実績
+   -
+    const achievements = [
+     {
+      pageName: "公共工事",
+      pageDir: ""
+     },
+     {
+      pageName: "老人ホーム・福祉施設",
+      pageDir: ""
+     },
+     {
+      pageName: "商業施設",
+      pageDir: ""
+     },
+     {
+      pageName: "社屋・工場施設",
+      pageDir: ""
+     },
+     {
+      pageName: "医療・保育施設",
+      pageDir: ""
+     },
+     {
+      pageName: "集合住宅",
+      pageDir: ""
+     }
+    ]
+   ul
+    each page in achievements
+     li: a(href="/"+page["pageDir"]+"/") #{page["pageName"]}
+   .img
+    img(src="/index/img/results_06.webp", alt="")
 
 append addjs
  script(src="/index/js/script.js")
