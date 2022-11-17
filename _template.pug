@@ -1,0 +1,19 @@
+extend /_template/_layout
+
+append meta
+ -
+  const pagetype= "website" //- 下層はarticleに変更
+append metatxt
+ -
+  const pageid = "top" //- meta情報 /_template/_description.pug参照
+append addcss
+ //- 独自css追加
+ link(rel="stylesheet", href="/index/css/layout.css")
+append pagecurrent
+ - const thisPageDir = "top" //- ナビカレント
+block content
+//- 個別ページ記述ここから
+
+//- 個別ページ記述ここまで
+append addjs
+ script(src="/index/js/script.js")

@@ -1,0 +1,12 @@
+mixin parts_dl($dt,$dd)
+ dl
+  each val1,index in $dt
+   dt!= val1
+   dd!= $dd[index]
+
+
+mixin img_slide($img,$alt)
+ .slider
+  each val,index in $img
+   .slide_items
+    img(src=val, alt=$alt[index], loading="lazy")

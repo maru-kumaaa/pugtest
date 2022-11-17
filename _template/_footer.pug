@@ -3,21 +3,23 @@ footer
   const ft_nav = [
    {
     pageName: "会社概要",
-    pageDir: ""
+    pageDir: "company"
    },
    {
     pageName: "施工実績",
-    pageDir: ""
+    pageDir: "results"
    },
    {
     pageName: "リクルート",
-    pageDir: ""
+    pageDir: "recruit"
    },
    {
     pageName: "アクセス",
-    pageDir: ""
+    pageDir: "access"
    }
   ]
  ul
   each page in ft_nav
    li: a(href="/"+page["pageDir"]+"/") #{page["pageName"]}
+ p
+  small Copyright (C) Ishii setsubi kougyou Co,ltd. All Rights Reserved.

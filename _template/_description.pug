@@ -1,0 +1,37 @@
+-
+ const meta = [
+  {
+   id:"top",
+   description:"TOPページです",
+   title:"TOP",
+  },
+  {
+   id:"company",
+   description:"会社案内ページです",
+   title:"会社案内",
+  },
+  {
+   id:"results",
+   description:"施工実績のページです",
+   title:"施工実績",
+  },
+  {
+   id:"recruit",
+   description:"採用情報のページです",
+   title:"リクルート",
+  },
+  {
+   id:"access",
+   description:"アクセスページです",
+   title:"アクセス",
+  },
+ ]
+
+block metatxt
+- for (let x = 0; x < meta.length; x++)
+ if meta[x]["id"]==pageid
+  title #{meta[x]["title"]}
+  meta(name="description", content=meta[x]["description"])
+  meta(property="og:title", content=meta[x]["title"])
+  meta(property="og:description", content=meta[x]["description"])
+ else
