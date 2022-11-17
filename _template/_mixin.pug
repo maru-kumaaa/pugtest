@@ -1,12 +1,34 @@
-mixin parts_dl($dt,$dd)
- dl
-  each val1,index in $dt
-   dt!= val1
-   dd!= $dd[index]
+//- dl
+mixin parts_dl($class,$dt,$dd,$nest)
+ dl(class=$class)
+  each val,index in $dt
+   if $nest[index]==""
+    dt!= val
+    dd!= $dd[index]
+   else
+    dt!= val
+    dd: #{$nest[index]}!= $dd[index]
 
-
-mixin img_slide($img,$alt)
- .slider
+//- 画像のみのスライド
+mixin img_slide($class,$img,$alt)
+ div(class=$class)
   each val,index in $img
    .slide_items
     img(src=val, alt=$alt[index], loading="lazy")
+
+//- グロナビ
+mixin gnav($class,$pageName,$pageDir)
+ ul(class=$class)
+  each val,index in $pageName
+   if $pageDir[index]==thisPageDir
+    li.is-current
+     a(href="/"+$pageDir[index]+"/")
+      span #{$pageName[index]}
+      i
+   else
+    li
+     a(href="/"+$pageDir[index]+"/")
+      span #{$pageName[index]}
+      i
+
+//-

@@ -72,6 +72,12 @@
     &:not(:last-child) {
      margin-bottom: 10px;
     }
+    a {
+     text-decoration: underline;
+    }
+    span {
+     color: #f70;
+    }
    }
   }
  }
