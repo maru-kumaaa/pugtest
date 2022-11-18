@@ -1,0 +1,26 @@
+extend /_template/_layout
+
+append meta
+ -
+  const pagetype= "article" //- 下層はarticleに変更
+append metatxt
+ -
+  const pageid = "a001" //- meta情報 /_template/_description.pug参照
+append addcss
+ //- 独自css追加
+ link(rel="stylesheet", href="/index/css/layout.css")
+append pagecurrent
+ - const thisPageDir = "recruit" //- ナビカレント
+block content
+ //- 記述ここから
+ section.kv
+  h1 リクルートです
+ section.about
+  h2 募集要項
+   .inner
+    dl
+     dt 応募資格
+     dd デザイナー経験5年以上
+ //- 記述ここまで
+append addjs
+ script(src="/index/js/script.js")
