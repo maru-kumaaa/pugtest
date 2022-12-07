@@ -39,6 +39,7 @@ gulp.task('pug', (done) => {
    pretty: true,
    basedir: './'
   }))
+  .pipe(plumber())
   .pipe(htmlmin({
    // 余白を除去する
    collapseWhitespace: true,
@@ -146,7 +147,6 @@ gulp.task('watch-files', (done) => {
  gulp.watch("./**/*.scss", gulp.task('sass'));
  gulp.watch(["./**/img/**", "!./_dist/**"], gulp.task('imagemin'));
  gulp.watch(["./**/img/**", "!./_dist/**"], gulp.task('img-webp'));
- gulp.watch("./*.html", gulp.task('browser-reload'));
  gulp.watch("./**/*.html", gulp.task('browser-reload'));
  gulp.watch("./**/*.css", gulp.task('browser-reload'));
  gulp.watch("./_dist/**/img/**", gulp.task('browser-reload'));

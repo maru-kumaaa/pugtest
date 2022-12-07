@@ -3,7 +3,7 @@
   {
    id:"top",
    description:"TOPページです",
-   title:"TOP",
+   title:"群馬の設備会社 石井設備工業",
   },
   {
    id:"company",
@@ -28,14 +28,14 @@
   {
    id:"a001",
    description:"この商品はa001です",
-   title:"高所作業台a001",
+   title:"商品番号a001",
   },
  ]
 
 block metatxt
 - for (let x = 0; x < meta.length; x++)
  if meta[x]["id"]==pageid
-  title #{meta[x]["title"]}
+  title #{meta[x]["title"]} | 石井設備工業
   meta(name="description", content=meta[x]["description"])
   meta(property="og:title", content=meta[x]["title"])
   meta(property="og:description", content=meta[x]["description"])
