@@ -71,7 +71,23 @@ gulp.task('sass', (done) => {
   .pipe(autoprefixer())
   .pipe(csscomb())
   .pipe(cleanCSS())
-  .pipe(sourcemaps.write("./"))
+  .pipe(sourcemaps.write("../"))
+  .pipe(gulp.dest('./_dist'));
+ done();
+});
+
+// mixin
+gulp.task('mixin', (done) => {
+ gulp.src(scss)
+  .pipe(sourcemaps.init())
+  .pipe(sassGlob())
+  .pipe(sass({
+   outputStyle: 'expanded'
+  }))
+  .on("error", sass.logError)
+  .pipe(autoprefixer())
+  .pipe(csscomb())
+  .pipe(sourcemaps.write("../"))
   .pipe(gulp.dest('./_dist'));
  done();
 });
@@ -145,6 +161,7 @@ gulp.task('watch-files', (done) => {
  gulp.watch("./**/*.pug", gulp.task('pug'));
  gulp.watch(js, gulp.task('uglify'));
  gulp.watch("./**/*.scss", gulp.task('sass'));
+ gulp.watch("./common/css/_mixin.scss", gulp.task('mixin'));
  gulp.watch(["./**/img/**", "!./_dist/**"], gulp.task('imagemin'));
  gulp.watch(["./**/img/**", "!./_dist/**"], gulp.task('img-webp'));
  gulp.watch("./**/*.html", gulp.task('browser-reload'));
