@@ -22,3 +22,6 @@ insert_final_newline = true
 
 [.html]
 indent_size = 1
+
+[.pug]
+indent_size = 2

@@ -35,11 +35,11 @@ gulp.task('comb', () => {
 
 gulp.task('pug', (done) => {
  gulp.src(pugfile)
+  .pipe(plumber())
   .pipe(pug({
    pretty: true,
    basedir: './'
   }))
-  .pipe(plumber())
   .pipe(htmlmin({
    // 余白を除去する
    collapseWhitespace: true,
