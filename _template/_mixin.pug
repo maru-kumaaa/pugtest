@@ -18,17 +18,27 @@ mixin img_slide($class,$img,$alt)
 
 //- グロナビ
 mixin gnav($class,$pageName,$pageDir)
- ul(class=$class)
-  each val,index in $pageName
-   if $pageDir[index]==thisPageDir
-    li.is-current
-     a(href="/"+$pageDir[index]+"/")
-      span #{$pageName[index]}
-      i
-   else
-    li
-     a(href="/"+$pageDir[index]+"/")
-      span #{$pageName[index]}
-      i
+ nav
+  ul(class=$class)
+   each val,index in $pageName
+    if $pageDir[index]==thisPageDir
+     li.is-current
+      a(href="/"+$pageDir[index]+"/")
+       span #{$pageName[index]}
+       i
+    else
+     li
+      a(href="/"+$pageDir[index]+"/")
+       span #{$pageName[index]}
+       i
 
+mixin pankuzu($name,$url)
+ section.pankuzu
+  ul
+   li: a(href="/") TOP
+   each val,index in $name
+    if $url[index]==""
+     li: strong #{$name[index]}
+    else
+     li: a(href="/"+$url[index]+"/") #{$name[index]}
 //-

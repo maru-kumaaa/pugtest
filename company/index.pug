@@ -6,12 +6,21 @@ append meta
 append metatxt
  - const pageid = "company"
 append addcss
- link(rel="stylesheet", href="/company/css/layout.css")
+ link(rel="stylesheet" href="/company/css/layout.css")
 append pagecurrent
  - const thisPageDir = "company" //- ナビカレント
 block content
+ +gnav(
+  ["gnav"],
+  ["TOP","会社概要","商品一覧","お問い合わせ"],
+  ["/","company","products","contact"]
+ )
  section.kv_area
   h1 会社案内
+ +pankuzu(
+  ["会社案内"],
+  [""]
+ )
  section.info_area
   .block.col2
    .box
@@ -104,7 +113,7 @@ block content
     +parts_dl(
      ["test"],
      ["第24期","第25期","第26期"],
-     ["平成24年4月1日～平成25年3月31日<br>8億0千万円","平成25年4月1日～平成26年3月31日<br>11億0千万円","平成26年4月1日～平成27年3月31日<br>13億0千万円"],
+     ["平成24年4月1日～平成25年3月31日<br>8億0千万円","平成25年4月1日～平成26年3月31日<br>11億0千万円","平成26年4月1日～平成27年3月31日<br>13億110千万円"],
      ["","","span"]
     )
 

@@ -19,9 +19,3 @@ trim_trailing_whitespace = true
 
 # 最終行に空行を追加
 insert_final_newline = true
-
-[.html]
-indent_size = 1
-
-[.pug]
-indent_size = 2

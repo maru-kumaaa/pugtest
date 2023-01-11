@@ -95,6 +95,7 @@ gulp.task('mixin', (done) => {
 // ローカル環境
 gulp.task('browser-sync', (done) => {
  browserSync.init({
+  open: 'external',
   server: {
    baseDir: './_dist/',
    index: './index.html',
